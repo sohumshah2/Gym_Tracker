@@ -1,135 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Dimensions, ImageBackground, TextInput, Pressable } from 'react-native';
-import styles from './styles';
-import Svg, { Image, Ellipse, ClipPath } from 'react-native-svg';
-import Animated, { useSharedValue, useAnimatedStyle, interpolate, withTiming, withDelay, withSequence, withSpring } from 'react-native-reanimated';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LoginScreen from './screens/LoginScreen';
+import HomeScreen from './screens/HomeScreen';
 
-<script src="http://localhost:8097"></script>
+
+const Stack = createNativeStackNavigator();
+
 export default function App() {
-  let { height, width } = Dimensions.get('window');
-  height += 80;
-  width += 1;
-  const imagePosition = useSharedValue(1);
-  const [isRegistering, setIsRegistering] = useState(false);
-  const formButtonScale = useSharedValue(1);
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-  const imageAnimatedStyle = useAnimatedStyle(() => {
-    const interpolation = interpolate(imagePosition.value, [0, 1], [-height / 2, 0])
-    return {
-      transform: [{translateY: withTiming(interpolation, {duration: 1000})}]
-    }
-  })
-
-  const buttonsAnimatedStyle = useAnimatedStyle(() => {
-    const interpolation = interpolate(imagePosition.value, [0, 1], [250, 0])
-    return {
-      opacity: withTiming(imagePosition.value, {duration: 500}),
-      transform: [{translateY: withTiming(interpolation, {duration: 1000})}]
-    }
-  })
-
-  const formAnimatedStyle = useAnimatedStyle(() => {
-    return {
-      opacity: imagePosition.value === 0 ? withDelay(400, withTiming(1, {duration: 800})) : withTiming(0, {duration: 300}),
-      transform: imagePosition.value !== 0 ? [{translateY: withTiming(-1000, {duration: 1000})}] :  [{translateY: withTiming(0, {duration: 100})}],
-    }
-  })
-
-  const closeButtonContainerStyle = useAnimatedStyle(() => {
-    const interpolation = interpolate(imagePosition.value, [0, 1], [180, 360])
-    return {
-      opacity: withTiming(imagePosition.value === 1 ? 0 : 1, {duration: 800}),
-      transform: [{rotate: withTiming(interpolation + "deg", {duration: 1000})}]
-    }
-  })
-
-  const loginHandler = () => {
-    imagePosition.value = 0
-    if (isRegistering) setIsRegistering(false);
-  }
-
-  const registerHandler = () => {
-    imagePosition.value = 0
-    if (!isRegistering) setIsRegistering(true);
-  }
-
-  const formButtonAnimatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{scale: formButtonScale.value}]
-    }
-  })  
-
   return (
-    <Animated.View style={ styles.container }>
-      {/* <Text>{email}</Text> */}
-      <Animated.View style={[{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}, imageAnimatedStyle]}>
-        <Svg height = { height} width = { width }>
-          <ClipPath id="clipPathId">
-            <Ellipse cx={width / 2} rx={height} ry={height}/>
-          </ClipPath>
-          {/* <ImageBackground 
-            source = { require('./assets/auth-background.webp') }
-            style = { styles.imageBackground }
-            clipPath="url(#clipPathId)"
-          >
-          </ImageBackground> */}
-          <Image 
-            href={require("./assets/auth-background.webp")}
-            width={width}
-            height={height}
-            preserveAspectRatio="xMidYMid slice"
-            clipPath="url(#clipPathId)"
-          />
-        </Svg>
-        <Animated.View style = {[styles.closeButtonContainer, closeButtonContainerStyle]}>
-          <Text onPress={()=>imagePosition.value = 1}>X</Text>
-        </Animated.View>
-      </Animated.View>
-      <View style = { styles.bottomContainer }>
-        <Animated.View style ={buttonsAnimatedStyle}>
-          <Pressable style = { styles.button }>
-            <Text style = { styles.buttonText } onPress = {loginHandler}>LOG IN</Text>
-          </Pressable>
-        </Animated.View>
-        <Animated.View style ={buttonsAnimatedStyle}>
-          <Pressable style = { styles.button }>
-            <Text style = { styles.buttonText } onPress = {registerHandler}>REGISTER</Text>
-          </Pressable>
-        </Animated.View>
-        <Animated.View style={[styles.formInputContainer, formAnimatedStyle]}>
-          <TextInput 
-            placeholder="Email" 
-            placeholderTextColor="black" 
-            style={styles.textInput}
-            onChangeText = {newEmail => setEmail(newEmail)}
-          />
-          {isRegistering && (
-            <TextInput 
-              placeholder="Username" 
-              placeholderTextColor="black" 
-              style={styles.textInput}
-              onChangeText = {newUsername => setUsername(newUsername)}
-
-            />
-          )}
-          <TextInput 
-            placeholder="Password" 
-            placeholderTextColor="black" 
-            style={styles.textInput}
-            onChangeText = {newPassword => setPassword(newPassword)}
-          />
-          <Animated.View style={[styles.formButton, formButtonAnimatedStyle]}>
-            <Pressable onPress={() => formButtonScale.value = withSequence(withSpring(1.5), withSpring(1))}>
-              <Text style={styles.buttonText}>{isRegistering ? 'REGISTER' : 'LOG IN'}</Text>
-            </Pressable>
-          </Animated.View>
-        </Animated.View>
-      </View>
-    </Animated.View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen options={{ headerShown: false}} name="Login" component={LoginScreen} />
+        <Stack.Screen options={{ headerShown: false}} name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
