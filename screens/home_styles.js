@@ -47,7 +47,14 @@ const styles = StyleSheet.create({
   workouts: {
     // resizeMode: 'contain',
     // width: '10%',
-    height: '50%',
+    // height: '50%',
+    width: width * 0.35,
+    height: width * 0.35 / 1.624,
+    left: 20,
+    // top: 50,
+    marginTop: 10,
+    // width: 150,
+    // height: 92,
   }
 
 
