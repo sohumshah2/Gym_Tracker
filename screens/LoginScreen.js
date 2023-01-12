@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, Dimensions, ImageBackground, TextInput, Pressable } from 'react-native';
-import styles from './styles';
+import styles from './login_styles';
 import Svg, { Image, Ellipse, ClipPath } from 'react-native-svg';
 import Animated, { useSharedValue, useAnimatedStyle, interpolate, withTiming, withDelay, withSequence, withSpring, runOnJS } from 'react-native-reanimated';
 import { auth } from "../firebase";
