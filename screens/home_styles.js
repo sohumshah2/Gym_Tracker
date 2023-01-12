@@ -55,9 +55,42 @@ const styles = StyleSheet.create({
     marginTop: 10,
     // width: 150,
     // height: 92,
-  }
+  },
 
+  routines: {
+    left: 35,
+    marginTop: 10,
+    width: width * 0.467,
+    height: width * 0.467 * 2
+  },
 
+  buttonText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: 'white',
+    letterSpacing: 0.5,
+  },
+
+  formButton: {
+    top: 60,
+    backgroundColor: '#021730',
+    height: 55,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 35,
+    marginHorizontal: 20,
+    marginVertical: 10,
+    borderWidth: 1,
+    borderColor: 'white',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
 
 
 });

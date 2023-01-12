@@ -9,14 +9,21 @@ import Animated, { useSharedValue, useAnimatedStyle, interpolate, withTiming, wi
 const HomeScreen = () => {
   let { height, width } = Dimensions.get('window');
 
-  const [selection, setSelection] = useState('lower A');
+  const [selection, setSelection] = useState('Lower A');
 
   const lowerAButtonScale = useSharedValue(1);
   const upperAButtonScale = useSharedValue(1);
   const lowerBButtonScale = useSharedValue(1);
   const upperBButtonScale = useSharedValue(1);
+  const formButtonScale = useSharedValue(1);
 
 
+  const formButtonAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{scale: formButtonScale.value}]
+    }
+  })  
+    
   const lowerAButtonAnimatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{scale: lowerAButtonScale.value}]
@@ -71,73 +78,81 @@ const HomeScreen = () => {
         <View style={styles.headerBackground} />
         <Text style={styles.heading}>Welcome to your workout plan.</Text>
 
-        <View style={{flexDirection: 'column'}}>
+        <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'column'}}>
 
-          <Animated.View style={[styles.formButton, lowerAButtonAnimatedStyle]}>
-            <Pressable 
-              onPress={() => {setSelection('lower A')}}
-              onPressOut = {() => { lowerAButtonScale.value = withSequence(withSpring(0.9), withSpring(1.1), withSpring(1)) }}
-            >
-                <Image 
-                  // style = {styles.image}
-                  source = {require("./assets/LowerA.png")}
-                  style = {styles.workouts}
-                />
-            </Pressable>
-          </Animated.View>
+            <Animated.View style={[, lowerAButtonAnimatedStyle]}>
+              <Pressable 
+                onPress={() => {setSelection('Lower A')}}
+                onPressOut = {() => { lowerAButtonScale.value = withSequence(withSpring(0.9), withSpring(1.1), withSpring(1)) }}
+              >
+                  <Image 
+                    // style = {styles.image}
+                    source = {require("./assets/LowerA.png")}
+                    style = {styles.workouts}
+                  />
+              </Pressable>
+            </Animated.View>
 
-          <Animated.View style={[styles.formButton, upperAButtonAnimatedStyle]}>
-            <Pressable 
-              onPress={() => {setSelection('upper A')}}
-              onPressOut = {() => { upperAButtonScale.value = withSequence(withSpring(0.9), withSpring(1.1), withSpring(1)) }}
-            >
-                <Image 
-                  // style = {styles.image}
-                  source = {require("./assets/UpperA.png")}
-                  style = {styles.workouts}
-                />
-            </Pressable>
-          </Animated.View>
+            <Animated.View style={[, upperAButtonAnimatedStyle]}>
+              <Pressable 
+                onPress={() => {setSelection('Upper A')}}
+                onPressOut = {() => { upperAButtonScale.value = withSequence(withSpring(0.9), withSpring(1.1), withSpring(1)) }}
+              >
+                  <Image 
+                    // style = {styles.image}
+                    source = {require("./assets/UpperA.png")}
+                    style = {styles.workouts}
+                  />
+              </Pressable>
+            </Animated.View>
 
-          <Animated.View style={[styles.formButton, lowerBButtonAnimatedStyle]}>
-            <Pressable 
-              onPress={() => {setSelection('lower B')}}
-              onPressOut = {() => { lowerBButtonScale.value = withSequence(withSpring(0.9), withSpring(1.1), withSpring(1)) }}
-            >
-                <Image 
-                  // style = {styles.image}
-                  source = {require("./assets/LowerB.png")}
-                  style = {styles.workouts}
-                />
-            </Pressable>
-          </Animated.View>
+            <Animated.View style={[, lowerBButtonAnimatedStyle]}>
+              <Pressable 
+                onPress={() => {setSelection('Lower B')}}
+                onPressOut = {() => { lowerBButtonScale.value = withSequence(withSpring(0.9), withSpring(1.1), withSpring(1)) }}
+              >
+                  <Image 
+                    // style = {styles.image}
+                    source = {require("./assets/LowerB.png")}
+                    style = {styles.workouts}
+                  />
+              </Pressable>
+            </Animated.View>
 
-          <Animated.View style={[styles.formButton, upperBButtonAnimatedStyle]}>
-            <Pressable 
-              onPress={() => {setSelection('upper B')}}
-              onPressOut = {() => { upperBButtonScale.value = withSequence(withSpring(0.9), withSpring(1.1), withSpring(1)) }}
-            >
-                <Image 
-                  // style = {styles.image}
-                  source = {require("./assets/UpperB.png")}
-                  style = {styles.workouts}
-                />
-            </Pressable>
-          </Animated.View>
+            <Animated.View style={[, upperBButtonAnimatedStyle]}>
+              <Pressable 
+                onPress={() => {setSelection('Upper B')}}
+                onPressOut = {() => { upperBButtonScale.value = withSequence(withSpring(0.9), withSpring(1.1), withSpring(1)) }}
+              >
+                  <Image 
+                    // style = {styles.image}
+                    source = {require("./assets/UpperB.png")}
+                    style = {styles.workouts}
+                  />
+              </Pressable>
+            </Animated.View>
 
-            <Text>hmm {selection}</Text>
+          </View>
 
-{/* 
-            <Image 
-                  // style = {styles.image}
-                  source = {require("./assets/lower.png")}
-                  style = {styles.workouts}
-                /> */}
-
-
-
+          <Image 
+            // style = {styles.image}
+            source = {selection.substring(0,5) === 'Upper' ? require("./assets/upper.png") : require("./assets/lower.png")} 
+            style = {styles.routines}
+          />
 
         </View>
+
+        <Animated.View style={[styles.formButton, formButtonAnimatedStyle]}>
+          <Pressable 
+            // onPress={isRegistering ? handleSignUp : handleLogin}
+            onPressOut = {() => { formButtonScale.value = withSequence(withSpring(1.5), withSpring(1)) }}
+          >
+            <Text style={styles.buttonText}>Start {selection}</Text>
+          </Pressable>
+        </Animated.View>
+
+
 
 
 
