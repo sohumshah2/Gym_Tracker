@@ -4,6 +4,8 @@ import styles from './home_styles';
 import Svg from 'react-native-svg';
 import Images from './images';
 import Animated, { useSharedValue, useAnimatedStyle, interpolate, withTiming, withDelay, withSequence, withSpring, runOnJS } from 'react-native-reanimated';
+import { auth } from '../firebase';
+import { useNavigation } from '@react-navigation/native';
 
 
 const HomeScreen = () => {
@@ -16,6 +18,18 @@ const HomeScreen = () => {
   const lowerBButtonScale = useSharedValue(1);
   const upperBButtonScale = useSharedValue(1);
   const formButtonScale = useSharedValue(1);
+
+  const navigation = useNavigation();
+
+  const handleSignOut = () => {
+    auth 
+      .signOut()
+      .then(() => {
+        navigation.replace("Login")
+      })
+      .catch(error => alert(error.message))
+
+  }
 
 
   const formButtonAnimatedStyle = useAnimatedStyle(() => {
@@ -70,10 +84,12 @@ const HomeScreen = () => {
             style = {styles.image}
             source = {require("./assets/logo.png")}
           />
-          <Image 
-            source = {require("./assets/logout.png")}
-            style = {styles.logout}
-          />
+          <Pressable onPress={handleSignOut} >
+            <Image 
+              source = {require("./assets/logout.png")}
+              style = {styles.logout}
+            />
+          </Pressable>
         </View>
         <View style={styles.headerBackground} />
         <Text style={styles.heading}>Welcome to your workout plan.</Text>

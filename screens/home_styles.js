@@ -28,11 +28,11 @@ const styles = StyleSheet.create({
 
   logout: {
     position: 'absolute',
-    top: -118,
-    left: '85%',
     resizeMode: 'contain',
-    width: '10%',
     alignSelf: 'flex-end',
+    top: -118,
+    left: -15,
+    width: 0.1 * width,
   },
 
   headerBackground: {
