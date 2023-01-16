@@ -8,13 +8,14 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'flex-end',
+      backgroundColor: 'black',
     },
     imageBackground: {
       width: '100%',
       height: '103%',
     },
     button: {
-      backgroundColor: 'rgba(123,104,238,0.8)',
+      backgroundColor: 'black',
       height: 55,
       alignItems: 'center',
       justifyContent: 'center',
@@ -31,21 +32,22 @@ const styles = StyleSheet.create({
       fontSize: 20,
       fontWeight: '600',
       color: 'white',
-      letterSpacing: 0.5
+      letterSpacing: 0.5,
     },
     bottomContainer: {
       justifyContent: 'center',
       height: height / 3,
-      
     },
     textInput: {
       height: 50,
       borderWidth: 1,
-      borderColor: 'rgba(0, 0, 0.2)',
+      borderColor: 'white',
       marginHorizontal: 20,
       marginVertical: 10,
       borderRadius: 25,
-      paddingLeft: 10
+      paddingLeft: 10,
+      color: 'white'
+      
     },
     formButton: {
       backgroundColor: 'rgba(123,104,238,0.8)',
@@ -67,6 +69,7 @@ const styles = StyleSheet.create({
       elevation: 5,
     },
     formInputContainer: {
+      color: 'white',
       marginBottom: 70,
       ...StyleSheet.absoluteFill,
       zIndex: 10,
@@ -90,7 +93,7 @@ const styles = StyleSheet.create({
       backgroundColor: 'white',
       alignItems: 'center',
       borderRadius: 20,
-      top: -20
+      top: -20,
     }
   });
   export default styles;
