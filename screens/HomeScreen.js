@@ -161,20 +161,12 @@ const HomeScreen = () => {
 
         <Animated.View style={[styles.formButton, formButtonAnimatedStyle]}>
           <Pressable 
-            // onPress={isRegistering ? handleSignUp : handleLogin}
-            onPressOut = {() => { formButtonScale.value = withSequence(withSpring(1.5), withSpring(1)) }}
+            onPress={() => navigation.navigate("Workout")}
+            onPressOut = {() => { formButtonScale.value = withSequence(withSpring(0.5), withSpring(1)) }}
           >
             <Text style={styles.buttonText}>Start {selection}</Text>
           </Pressable>
         </Animated.View>
-
-
-
-
-
-
-
-
       </View>
     </View>
   )
