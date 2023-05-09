@@ -7,7 +7,7 @@ Implemented features:
 - Viewing workout plans on different days
 - Navigation between screens, animations
 
-Currently working on & holiday goals:
+Goals:
 - The start workout screen, with the ability to view and modify the number of sets/reps, add notes, countdown timers for rest between exercises
 - Adding custom workout plans
 - A web app for visualising progress and viewing summaries of past workouts
